@@ -1,4 +1,8 @@
-﻿using System;
+﻿
+using AutoMapper;
+using BookApp.Models.Domain;
+using BookApp.Models.DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -16,6 +20,17 @@ namespace BookApp
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            Mapper.Initialize(cfg => {
+                // domain -> dto
+                cfg.CreateMap<Book, BookDto>();
+                cfg.CreateMap<Person, PersonDto>();
+                cfg.CreateMap<PersonBook, PersonBookDto>();
+
+                // dto -> domain
+                cfg.CreateMap<BookDto, Book>();
+                cfg.CreateMap<PersonDto, Person>();
+                cfg.CreateMap<PersonBookDto, PersonBook>();
+            });
         }
     }
 }

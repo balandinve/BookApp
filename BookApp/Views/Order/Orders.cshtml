@@ -1,0 +1,28 @@
+﻿@model List<BookApp.Models.DTO.PersonBookDto>
+@{
+    var orders = Model;
+}
+10 последних взятых книг
+<table class="table">
+    <thead>
+        <tr>
+            <th>Взял, ФИО</th>
+            <th>Книга, наименование</th>
+            <th>Книга, автор</th>
+            <th>Дата</th>
+            <th>Кол-во дней</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in orders)
+        {
+            <tr>
+                <td>@order.PersonFullName</td>
+                <td>@order.BookTitle</td>
+                <td>@order.BookAuthor</td>
+                <td>@order.GetDate.ToShortDateString()</td>
+                <td>@order.GetDays</td>
+            </tr>
+        }
+    </tbody>
+</table>

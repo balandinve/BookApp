@@ -1,0 +1,26 @@
+﻿@model BookApp.Models.DTO.OrderDto
+@{
+    var order = Model;
+}
+<div id="orderForm">
+    @using (Ajax.BeginForm("NewOrder", new AjaxOptions { UpdateTargetId = "orderForm" }))
+    {
+        <div class="form-group">
+            <label for="FullName">ФИО</label>
+            @Html.DropDownList("PersonId", order.Persons, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label for="Birthday">День рождения</label>
+            @Html.DropDownList("BookId", order.Books, new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            <label for="GetDate">Дата выдачи</label>
+            @Html.TextBox("GetDate", DateTime.Now.ToShortDateString(), new { @class = "form-control", type = "date" })
+        </div>
+        <div class="form-group">
+            <label for="GetDate">Кол-во дней</label>
+            @Html.TextBox("GetDays", 1, new { @class = "form-control", type = "number" })
+        </div>
+        <button type="submit" class="btn btn-default">Выдать</button>
+    }
+</div>

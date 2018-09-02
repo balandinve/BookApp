@@ -1,0 +1,36 @@
+﻿@model List<BookApp.Models.DTO.PersonDto>
+@{
+    ViewBag.Title = "Справочник читателей";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+     var persons = Model;
+}
+
+
+<div class="row">
+    <div class="col-md-3">
+        @using (Ajax.BeginForm("Filter", new AjaxOptions { UpdateTargetId = "persons" }))
+        {
+            <div class="form-inline">
+                <div class="form-group">
+                    <input type="text" class="form-control" placeholder="Поиск по ФИО" name="FullName" />
+                    <input type="submit" class="btn btn-default" value="Поиск" />
+                </div>
+
+            </div>
+
+        }
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-6">
+        @Html.ActionLink("Новый читатель", "Edit", new { id = 0 }, new { @class = "btn btn-primary" })
+    </div>
+
+</div>
+
+<div class="row">
+    <div class="col-md-8">
+        @Html.Partial("Filter", persons)
+    </div>
+</div>
+

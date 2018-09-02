@@ -1,0 +1,42 @@
+﻿@model BookApp.Models.DTO.PersonBookDto
+@{
+    ViewBag.Title = "Выдача книг";
+    BookApp.Models.DTO.OrderDto data = ViewBag.Data;
+    List<BookApp.Models.DTO.PersonBookDto> orders = ViewBag.Orders;
+    var order = Model;
+}
+
+<div class="row">
+    <div class="col-md-4">
+        @using (Html.BeginForm("NewOrder", "Order", FormMethod.Post))
+        {
+            @Html.ValidationSummary(true)
+            <div class="form-group">
+                <label for="FullName">ФИО</label>
+                @Html.DropDownListFor(m => order.PersonId, new SelectList(data.Persons, "Value", "Text", @order.PersonId), new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => order.PersonId,"",new { @class="text-danger"})
+            </div>
+            <div class="form-group">
+                <label for="BookId">Книга</label>
+                @Html.DropDownListFor(m => order.BookId, new SelectList(data.Books, "Value", "Text", order.BookId), new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => order.BookId, "", new { @class="text-danger" })
+            </div>
+            <div class="form-group">
+                <label for="GetDate">Дата выдачи</label>
+                @Html.TextBoxFor(m => order.GetDate, new { @class = "form-control", type = "date" })
+                @Html.ValidationMessageFor(m => order.GetDate, "", new { @class="text-danger" })
+            </div>
+            <div class="form-group">
+                <label for="GetDate">Кол-во дней</label>
+                @Html.TextBoxFor(m => order.GetDays, new { @class = "form-control", type = "number" })
+                @Html.ValidationMessageFor(m => order.GetDays, "", new { @class="text-danger" })
+            </div>
+            <button type="submit" class="btn btn-default">Выдать</button>
+        }
+        <div id="orderForm"></div>
+
+    </div>
+    <div class="col-md-8">
+        @Html.Partial("Orders", orders)
+    </div>
+</div>

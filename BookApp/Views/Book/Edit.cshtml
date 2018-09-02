@@ -1,0 +1,36 @@
+﻿@model BookApp.Models.DTO.BookDto
+@{
+    ViewBag.Title = "Редактирование книги";
+    var book = Model;
+}
+
+<div class="row">
+    <div class="col-md-6">
+        @using (Html.BeginForm("Edit", "Book", FormMethod.Post))
+        {
+            @Html.ValidationSummary(true)
+            @Html.HiddenFor(m => m.Id)
+            <div class="form-group">
+                <label for="Title">Заголовок</label>
+                @Html.TextBoxFor(m => m.Title, new { @class = "form-control", placeholder = "Заголовок" })
+                @Html.ValidationMessageFor(m => m.Title,"",new { @class="text-danger"})
+            </div>
+            <div class="form-group">
+                <label for="Author">Автор</label>
+                @Html.TextBoxFor(m => m.Author, new { @class = "form-control", placeholder = "Автор" })
+                @Html.ValidationMessageFor(m => m.Author, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <label for="Year">Год</label>
+                @Html.TextBoxFor(m => m.Year, new { @class = "form-control", type = "number" })
+                @Html.ValidationMessageFor(m => m.Year, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                <label for="Article">Артикул</label>
+                @Html.TextBoxFor(m => m.Article, new { @class = "form-control", placeholder = "Артикул" })
+                @Html.ValidationMessageFor(m => m.Article, "", new { @class = "text-danger" })
+            </div>
+            <button type="submit" class="btn btn-default">Сохранить</button>
+        }
+    </div>
+</div>

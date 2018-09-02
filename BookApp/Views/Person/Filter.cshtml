@@ -1,0 +1,28 @@
+﻿@model List<BookApp.Models.DTO.PersonDto>
+@{
+    var persons = Model;
+}
+<div id="persons">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ФИО</th>
+                <th>День рождения</th>
+                
+            </tr>
+        </thead>
+        @foreach (var person in persons)
+        {
+            <tr>
+                <td>@person.FullName</td>
+                <td>@person.Birthday.ToShortDateString()</td>
+                
+                <td>
+                    @Html.ActionLink("Редактировать", "Edit", new { id = person.Id }, new { @class = "btn btn-danger" })
+                    @Html.ActionLink("Удалить", "Delete", new { id = person.Id }, new { @class = "btn btn-warning" })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>
